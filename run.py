@@ -5,12 +5,13 @@ import sys
 import argparse
 from distutils.util import strtobool
 
-EXTENSION_BLACKLIST = set([".pyc"])
+EXTENSION_BLACKLIST = set([".pyc", ".png", ".md"])
 
 def get_args():
     parser = argparse.ArgumentParser(prog="python3 {}".format(sys.argv[0]), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
     parser.add_argument('-r', '--recursive', action="store_true", help="encypt/decrpyt files recursively. required for folders", default=False)
     parser.add_argument('-d', "--delete", action="store_true", help="after encrypting/decrypting, delete the original file", default=False)
+    parser.add_argument('-i', "--ignore-blacklist", action="store_true", help="ignore files that would be blocked by the extension blacklist", default=False)
     required = parser.add_argument_group('required arguments')
     required.add_argument("-f", "--file", required=True, help="file or directory to encode/decode")
     required_m_group = required.add_mutually_exclusive_group(required=True)
@@ -18,7 +19,7 @@ def get_args():
     required_m_group.add_argument("-s", "--subtract", action="store_true", help="decrypt; subtract 1 from each unicode character")
     return parser.parse_args()
 
-def discover_files(filepaths, recursive_opt):
+def discover_files(filepaths, recursive_opt, ignore_ext_opt):
     """Make sure all files given exist, and discover any files in directories if we're discovering directories recursively."""
     discovered_files = set()
     i = 0
@@ -41,12 +42,12 @@ def discover_files(filepaths, recursive_opt):
                     filepaths.extend(dir_contents)
         else: # if path is a file
             name, extension = os.path.splitext(f)
-            if extension in EXTENSION_BLACKLIST:
+            if not ignore_ext_opt and extension in EXTENSION_BLACKLIST:
                 print(f"Skipping file with blacklisted extension: {f}")
             elif os.path.split(f)[-1].startswith('.'):
                 print(f"Skipping hidden file: {f}")
             else:
-                discovered_files.add(f)
+                discovered_files.add(os.path.abspath(f))
         i += 1
     return list(discovered_files)
 
@@ -58,7 +59,7 @@ def prompt(s):
         print(strtobool.__doc__)
 
 def encrypt_file(filepath, delete_opt):
-    print(f"Encryting {filepath}...")
+    print(f"Encrypting {filepath}...")
     name, extension = os.path.splitext(filepath)
     if name.endswith('[plus1]'):
         print(f'{filepath} is already encrypted', file=sys.stderr)
@@ -97,7 +98,7 @@ def decrypt_file(filepath, delete_opt):
 
 def main():
     args = get_args()
-    files = discover_files([args.file], args.recursive)
+    files = discover_files([args.file], args.recursive, args.ignore_blacklist)
     for f in files:
         if args.add:
             encrypt_file(f, args.delete)
