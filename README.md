@@ -3,12 +3,15 @@ A symmetric substitution cipher that adds/subtracts one to each unicode characte
 The motivation for this was to obfuscate code so I could post solutions online without them being indexed.
 
 ```
-usage: python3 run.py [-h] [-r] [-d] -f FILE (-a | -s)
+usage: python3 run.py [-h] [-r] [-d] [-i] -f FILE (-a | -s)
 
 optional arguments:
   -h, --help            show this help message and exit
-  -r, --recursive       encypt/decrpyt files recursively. required for folders
+  -r, --recursive       encypt/decrpyt directories recursively
   -d, --delete          after encrypting/decrypting, delete the original file
+  -i, --ignore-blacklist
+                        ignore files that would be blocked by the extension
+                        blacklist
 
 required arguments:
   -f FILE, --file FILE  file or directory to encode/decode

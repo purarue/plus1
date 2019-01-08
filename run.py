@@ -9,7 +9,7 @@ EXTENSION_BLACKLIST = set([".pyc", ".png", ".md"])
 
 def get_args():
     parser = argparse.ArgumentParser(prog="python3 {}".format(sys.argv[0]), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
-    parser.add_argument('-r', '--recursive', action="store_true", help="encypt/decrpyt files recursively. required for folders", default=False)
+    parser.add_argument('-r', '--recursive', action="store_true", help="encypt/decrpyt directories recursively", default=False)
     parser.add_argument('-d', "--delete", action="store_true", help="after encrypting/decrypting, delete the original file", default=False)
     parser.add_argument('-i', "--ignore-blacklist", action="store_true", help="ignore files that would be blocked by the extension blacklist", default=False)
     required = parser.add_argument_group('required arguments')
@@ -31,7 +31,7 @@ def discover_files(filepaths, recursive_opt, ignore_ext_opt):
             sys.exit(1)
         if os.path.isdir(f):
             if not recursive_opt:
-                print(f"You passed in a directory ({f}), without specifying a recursive search. That doesn't make sense.", file=sys.stderr)
+                print(f"You passed in a directory ({f}), without specifying a recursive search (-r). That doesn't make sense.", file=sys.stderr)
                 sys.exit(1)
             else:
                 # skip hidden directories
