@@ -11,7 +11,7 @@ def get_args():
     parser = argparse.ArgumentParser(prog="python3 {}".format(sys.argv[0]), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
     parser.add_argument('-r', '--recursive', action="store_true", help="encypt/decrpyt directories recursively", default=False)
     parser.add_argument('-d', "--delete", action="store_true", help="after encrypting/decrypting, delete the original file", default=False)
-    parser.add_argument('-i', "--ignore-blacklist", action="store_true", help="ignore files that would be blocked by the extension blacklist", default=False)
+    parser.add_argument('-i', "--ignore-blacklist", action="store_true", help="ignore the extension blacklist and consider files that would have been blocked otherwise", default=False)
     required = parser.add_argument_group('required arguments')
     required.add_argument("-f", "--file", required=True, help="file or directory to encode/decode")
     required_m_group = required.add_mutually_exclusive_group(required=True)

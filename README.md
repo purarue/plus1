@@ -10,8 +10,8 @@ optional arguments:
   -r, --recursive       encypt/decrpyt directories recursively
   -d, --delete          after encrypting/decrypting, delete the original file
   -i, --ignore-blacklist
-                        ignore files that would be blocked by the extension
-                        blacklist
+                        ignore the extension blacklist and consider files that
+                        would have been blocked otherwise
 
 required arguments:
   -f FILE, --file FILE  file or directory to encode/decode
