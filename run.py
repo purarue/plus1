@@ -8,10 +8,12 @@ from distutils.util import strtobool
 EXTENSION_BLACKLIST = set([".pyc", ".png", ".md"])
 
 def get_args():
-    parser = argparse.ArgumentParser(prog="python3 {}".format(sys.argv[0]), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
-    parser.add_argument('-r', '--recursive', action="store_true", help="encypt/decrpyt directories recursively", default=False)
+    parser = argparse.ArgumentParser(prog="python3 {}".format(os.path.basename(sys.argv[0])), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
+    parser.add_argument('-r', '--recursive', action="store_true", help="encrypt/decrpyt directories recursively", default=False)
     parser.add_argument('-d', "--delete", action="store_true", help="after encrypting/decrypting, delete the original file", default=False)
     parser.add_argument('-i', "--ignore-blacklist", action="store_true", help="ignore the extension blacklist and consider files that would have been blocked otherwise", default=False)
+    parser.add_argument("--hidden-files", action="store_true", help="don't ignore hidden files", default=False)
+    parser.add_argument("--hidden-directories", action="store_true", help="don't ignore hidden directories", default=False)
     required = parser.add_argument_group('required arguments')
     required.add_argument("-f", "--file", required=True, help="file or directory to encode/decode")
     required_m_group = required.add_mutually_exclusive_group(required=True)
@@ -19,7 +21,7 @@ def get_args():
     required_m_group.add_argument("-s", "--subtract", action="store_true", help="decrypt; subtract 1 from each unicode character")
     return parser.parse_args()
 
-def discover_files(filepaths, recursive_opt, ignore_ext_opt):
+def discover_files(filepaths, recursive_opt, ignore_ext_opt, h_files_opt, h_dir_opt):
     """Make sure all files given exist, and discover any files in directories if we're discovering directories recursively."""
     discovered_files = set()
     i = 0
@@ -35,7 +37,7 @@ def discover_files(filepaths, recursive_opt, ignore_ext_opt):
                 sys.exit(1)
             else:
                 # skip hidden directories
-                if os.path.split(f)[-1].startswith('.'):
+                if not h_dir_opt and os.path.split(f)[-1].startswith('.'):
                     print(f"Skipping hidden directory: {f}")
                 else:
                     dir_contents = [os.path.join(f, path) for path in os.listdir(f)]
@@ -44,7 +46,7 @@ def discover_files(filepaths, recursive_opt, ignore_ext_opt):
             name, extension = os.path.splitext(f)
             if not ignore_ext_opt and extension in EXTENSION_BLACKLIST:
                 print(f"Skipping file with blacklisted extension: {f}")
-            elif os.path.split(f)[-1].startswith('.'):
+            elif not h_files_opt and os.path.split(f)[-1].startswith('.'):
                 print(f"Skipping hidden file: {f}")
             else:
                 discovered_files.add(os.path.abspath(f))
@@ -98,7 +100,7 @@ def decrypt_file(filepath, delete_opt):
 
 def main():
     args = get_args()
-    files = discover_files([args.file], args.recursive, args.ignore_blacklist)
+    files = discover_files([args.file], args.recursive, args.ignore_blacklist, args.hidden_files, args.hidden_directories)
     for f in files:
         if args.add:
             encrypt_file(f, args.delete)

@@ -1,9 +1,12 @@
 A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.
 
-The motivation for this was to obfuscate code so I could post solutions online without them being indexed.
+The motivation for this was to obfuscate code so I could [post solutions online](https://github.com/seanbreckenridge/CS-Assignments) without them being indexed.
 
 ```
-usage: python3 run.py [-h] [-r] [-d] [-i] -f FILE (-a | -s)
+usage: python3 /Users/sean/bin/plus1/run.py [-h] [-r] [-d] [-i]
+                                            [--hidden-files]
+                                            [--hidden-directories] -f FILE
+                                            (-a | -s)
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -12,10 +15,12 @@ optional arguments:
   -i, --ignore-blacklist
                         ignore the extension blacklist and consider files that
                         would have been blocked otherwise
+  --hidden-files        don't ignore hidden files
+  --hidden-directories  don't ignore hidden directories
 
 required arguments:
   -f FILE, --file FILE  file or directory to encode/decode
-  -a, --add             encypt; add 1 to each unicode character
+  -a, --add             encrypt; add 1 to each unicode character
   -s, --subtract        decrypt; subtract 1 from each unicode character
 ```
 
