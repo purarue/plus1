@@ -5,7 +5,7 @@ import sys
 import argparse
 from distutils.util import strtobool
 
-EXTENSION_BLACKLIST = set([".pyc", ".png", ".md"])
+EXTENSION_BLACKLIST = set([".pyc", ".png", ".md", ".gz", ".mp3", ".opus"])
 
 def get_args():
     parser = argparse.ArgumentParser(prog="python3 {}".format(os.path.basename(sys.argv[0])), description="A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.")
