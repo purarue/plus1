@@ -1,0 +1,5 @@
+include LICENSE
+include plus1/plus1_blacklist.txt.dist
+exclude README.md
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
