@@ -3,26 +3,27 @@ A symmetric substitution cipher that adds/subtracts one to each unicode characte
 The motivation for this was to obfuscate code so I could [post solutions online](https://github.com/seanbreckenridge/CS-Assignments) without them being indexed.
 
 ```
-usage: python3 run.py [-h] [-r] [-d] [-i] [--hidden-files]
-                      [--hidden-directories] -f FILE (-a | -s)
+usage: plus1 [-h] [-r] [-d] [-i] [--encrypt-hidden-files]
+             [--encrypt-hidden-directories] -f FILE (-a | -s)
 
 A symmetric substitution cipher that adds/subtracts one to each unicode
 character in a file/directory.
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -r, --recursive       encrypt/decrypt directories recursively
-  -d, --delete          after encrypting/decrypting, delete the original file
-  -i, --ignore-blacklist
-                        ignore the extension blacklist and consider files that
-                        would have been blocked otherwise
-  --hidden-files        don't ignore hidden files
-  --hidden-directories  don't ignore hidden directories
+  -h, --help                    show this help message and exit
+  -r, --recursive               encrypt/decrypt directories recursively
+  -d, --delete                  after encrypting/decrypting, delete the
+                                original file
+  -i, --ignore-blacklist        ignore the extension blacklist and consider
+                                files that would have been ignored otherwise
+  --encrypt-hidden-files        don't ignore hidden files
+  --encrypt-hidden-directories  don't ignore hidden directories
 
 required arguments:
-  -f FILE, --file FILE  file or directory to encode/decode
-  -a, --add             encrypt; add 1 to each unicode character
-  -s, --subtract        decrypt; subtract 1 from each unicode character
+  -f FILE, --file FILE          file or directory to encrypt/decrypt
+  -a, --add                     encrypt; add 1 to each unicode character
+  -s, --subtract                decrypt; subtract 1 from each unicode
+                                character
 ```
 
 Example:
