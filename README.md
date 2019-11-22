@@ -2,7 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-A symmetric substitution cipher that adds/subtracts one to each unicode character in a file/directory.
+A symmetric substitution cipher that adds/subtracts one to each Unicode character in a file/directory.
 
 The motivation for this was to obfuscate code so I could [post solutions online](https://github.com/seanbreckenridge/CS-Assignments) without them being indexed.
 
