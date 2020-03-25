@@ -25,9 +25,10 @@ def get_args():
 def get_blacklist():
     """Initializes the blacklist.
 
-    If it doesn't exist, copies the default to the users home directory
+    If it doesn't exist, copies the default to the users config directory
     """
-    blacklist_location = os.path.join(Path.home(), ".plus1_blacklist.txt")
+    user_config_dir = os.environ.get("XDG_CONFIG_HOME", os.path.join(Path.home(), ".config"))
+    blacklist_location = os.path.join(user_config_dir, "plus1_blacklist.txt")
     if not os.path.exists(blacklist_location):
         default_blacklist_location = os.path.join(os.path.dirname(os.path.abspath(__file__)), "plus1_blacklist.txt.dist")
         print("Copying default blacklist to {}".format(blacklist_location))
