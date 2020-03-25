@@ -6,7 +6,7 @@ A symmetric substitution cipher that adds/subtracts one to each Unicode characte
 
 The motivation for this was to obfuscate code so I could [post solutions online](https://github.com/seanbreckenridge/CS-Assignments) without them being indexed.
 
-`plus1` creates an extension blacklist at `~/.plus1_blacklist.txt` (a plain text file), which defines extension types to ignore, one per line. These will be ignored by plus1 unless the `--ignore-blacklist` option is passed. Some extensions you may want to ignore are listed in [`plus1_blacklist.txt.dist`](./plus1/plus1_blacklist.txt.dist).
+`plus1` creates an extension blacklist at `~/.config/plus1_blacklist.txt` (a plain text file), which defines extension types to ignore, one per line. These will be ignored by plus1 unless the `--ignore-blacklist` option is passed. Some extensions you may want to ignore are listed in [`plus1_blacklist.txt.dist`](./plus1/plus1_blacklist.txt.dist).
 
 Requires: python3.4+
 
