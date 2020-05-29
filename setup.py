@@ -24,7 +24,7 @@ setup(
             "plus1 = plus1.plus1:main"
         ]
     },
-    url='https://github.com/seanbreckenridge/plus1',
+    url='https://gitlab.com/seanbreckenridge/plus1',
     version='0.1.0',
     zip_safe=False,
 )
