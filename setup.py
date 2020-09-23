@@ -21,7 +21,7 @@ setup(
     packages=find_packages(include=['plus1']),
     entry_points = {
         'console_scripts': [
-            "plus1 = plus1.plus1:main"
+            "plus1 = plus1.__main__:main"
         ]
     },
     url='https://gitlab.com/seanbreckenridge/plus1',
