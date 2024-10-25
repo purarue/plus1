@@ -6,8 +6,7 @@ from setuptools import setup, find_packages
 requirements = []
 
 setup(
-    author="Sean Breckenridge",
-    author_email='seanbrecke@gmail.com',
+    author="purarue",
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: End Users/Desktop',
@@ -24,7 +23,7 @@ setup(
             "plus1 = plus1.__main__:main"
         ]
     },
-    url='https://github.com/seanbreckenridge/plus1',
+    url='https://github.com/purarue/plus1',
     version='0.1.0',
     zip_safe=False,
 )
